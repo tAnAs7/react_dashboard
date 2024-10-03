@@ -1,13 +1,15 @@
-version: '3'
+version: '3.8'
 
 services:
-  portal:
-    build: .
+  nortal:
+    image: nortal
+    stdin_open: true
     ports:
       - '3000:3000'
     volumes:
-      - .:/app
-      - /app/node_modules
+      - "./:/usr/src/app:delegated"
+      - /usr/src/app/node_modules
     environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: npm start
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=false
+      - WDS_SOCKET_PORT=30000 # The mapped port on host machine
